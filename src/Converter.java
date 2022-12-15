@@ -1,9 +1,13 @@
 public class Converter {
+    final  int a = 100000;
+    final  int b = 1000;
+    final int x = 75;
+    final int y = 50;
         double distanceCalculation(double steps){
-            return (steps * 75) / 100000;
+            return (steps * x) / a;
         }
         double caloriesCalculation(double steps){
-            return (steps * 50) / 1000;
+            return (steps * y) / b;
         }
 
 }
