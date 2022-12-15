@@ -1,3 +1,4 @@
+
 public class StepTracker {
     int stepGoal = 10000;
     int [][] monthOfYear;
@@ -5,37 +6,7 @@ public class StepTracker {
     public StepTracker() {
         monthOfYear = new int[12][30];
     }
-    boolean isMonthCorrect(int month){
-        if(month < 0 || month > 11){
-            System.out.println("Ошибка! Введите месяц в диапозоне от 0 до 11\n");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    boolean isDayCorrect(int dayOfMonth){
-        if(dayOfMonth < 1 || dayOfMonth > 30){
-            System.out.println("Ошибка! Введите день в диапозоне от 1 до 30\n");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    boolean isStepsCorrect(int steps){
-        if(steps < 0){
-            System.out.println("Ошибка! Введите положительное количество шагов.\n");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
     void enterSteps(int month, int dayOfMonth, int steps) {
-        if(!isMonthCorrect(month) || !isDayCorrect(dayOfMonth) || !isStepsCorrect(steps)){
-            return;
-        }
         for (int i = 0; i < monthOfYear.length; i++) {
             for(int j = 0; j < monthOfYear[i].length; j++) {
                 if (month == i && (dayOfMonth - 1) == j) {
@@ -48,21 +19,23 @@ public class StepTracker {
         System.out.println("Значение сохранено!\n");
     }
     void takenSteps(int month){
+        StringBuffer sBuffer = new StringBuffer();
         System.out.println("Количество пройденных шагов по дням: \n" );
-        for (int i = 0; i < 30; i++) {
-            System.out.println("День " + (i+1) + ": " + monthOfYear[month][i] + " шагов;");
+        for (int i = 0; i < monthOfYear[month].length; i++) {
+            sBuffer.append((i+1)  + " день"  + ": " + monthOfYear[month][i] + " шагов, ");
         }
+        System.out.println(sBuffer);
     }
     double totalSteps(int month){
         double sumOfSteps = 0;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < monthOfYear[month].length; i++) {
             sumOfSteps += monthOfYear[month][i];
         }
         return sumOfSteps;
     }
     int maxAmount(int month){
         int maxSteps = 0;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < monthOfYear[month].length; i++) {
             if(monthOfYear[month][i] > maxSteps){
                 maxSteps = monthOfYear[month][i];
             }
@@ -70,12 +43,12 @@ public class StepTracker {
         return maxSteps;
     }
     double avgNumOfSteps(int month){
-        return totalSteps(month) / 30;
+        return totalSteps(month) / monthOfYear[month].length;
     }
     int bestSeries(int month){
         int bestSeries = 0;
         int maxBestSeries = 0;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < monthOfYear[month].length; i++) {
             if(monthOfYear[month][i] >= stepGoal){
                 ++bestSeries;
             } else{
@@ -88,9 +61,6 @@ public class StepTracker {
         return maxBestSeries;
     }
     void printStatistic(int month) {
-        if(!isMonthCorrect(month)){
-            return;
-        }
         double stepsKm = converter.distanceCalculation(totalSteps(month));
         double kilocalories = converter.caloriesCalculation(totalSteps(month));
         takenSteps(month);
@@ -102,9 +72,6 @@ public class StepTracker {
                            "Количество сожжённых килокалорий: " + kilocalories + "\n");
     }
     void changeStepGoal(int newStepGoal) {
-        if (!isStepsCorrect(newStepGoal)){
-            return;
-        }
         stepGoal = newStepGoal;
         System.out.println("Значение сохранено! Ваша текущая цель по шагам: " + stepGoal);
     }
