@@ -7,22 +7,14 @@ public class StepTracker {
         monthOfYear = new int[12][30];
     }
     void enterSteps(int month, int dayOfMonth, int steps) {
-        for (int i = 0; i < monthOfYear.length; i++) {
-            for(int j = 0; j < monthOfYear[i].length; j++) {
-                if (month == i && (dayOfMonth - 1) == j) {
-                    int swap = steps;
-                    steps = monthOfYear[month][dayOfMonth - 1];
-                    monthOfYear[month][dayOfMonth - 1] = swap;
-                }
-            }
-        }
+        monthOfYear[month][dayOfMonth - 1] = steps;
         System.out.println("Значение сохранено!\n");
     }
     void takenSteps(int month){
         StringBuffer sBuffer = new StringBuffer();
         System.out.println("Количество пройденных шагов по дням: \n" );
         for (int i = 0; i < monthOfYear[month].length; i++) {
-            sBuffer.append((i+1)  + " день"  + ": " + monthOfYear[month][i] + " шагов, ");
+            sBuffer.append(i + 1).append(" день").append(": ").append(monthOfYear[month][i]).append(" шагов, ");
         }
         System.out.println(sBuffer);
     }

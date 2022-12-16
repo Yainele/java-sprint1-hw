@@ -1,13 +1,13 @@
 public class Converter {
-    final  int a = 100000;
-    final  int b = 1000;
-    final int x = 75;
-    final int y = 50;
+    final int centToKilometer = 100000;
+    final int caloriesToKilo = 1000;
+    final int oneStepInCm = 75;
+    final int oneStepInCalories = 50;
         double distanceCalculation(double steps){
-            return (steps * x) / a;
+            return (steps * oneStepInCm) / centToKilometer;
         }
         double caloriesCalculation(double steps){
-            return (steps * y) / b;
+            return (steps * oneStepInCalories) / caloriesToKilo;
         }
 
 }
